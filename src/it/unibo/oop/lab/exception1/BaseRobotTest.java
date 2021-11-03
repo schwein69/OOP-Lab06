@@ -2,6 +2,7 @@ package it.unibo.oop.lab.exception1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
@@ -37,6 +38,8 @@ public final class BaseRobotTest {
             // check if position if coherent
             assertTrue("[CHECKING MOVING RIGHT]", r1.moveRight());
         }
+        try {
+        
         // reached the right limit of the world
         assertFalse("[CHECKING MOVING RIGHT]", r1.moveRight());
         // checking positions x=50; y=0
@@ -50,12 +53,24 @@ public final class BaseRobotTest {
             assertTrue("[CHECKING MOVING UP]", r1.moveUp());
         }
         // reached the upper limit of the world
+        boolean le = r1.moveUp();
+        System.out.println(le);
         assertFalse("[CHECKING MOVING UP]", r1.moveUp());
         // checking positions x=50; y=80
         assertEquals("[MOVING RIGHT ROBOT POS X]", RobotEnvironment.WORLD_X_UPPER_LIMIT, r1.getEnvironment().getCurrPosX());
         assertEquals("[MOVING RIGHT ROBOT POS Y]", RobotEnvironment.WORLD_Y_UPPER_LIMIT, r1.getEnvironment().getCurrPosY());
+        
+       /* if(r1.moveUp()==false) {
+           
+        }*/
+        
+    }catch(PositionOutOfBoundException p) {
+    	//fail("Should have thrown an exception");
+	System.out.println(p);
+    	System.out.println("2 asd sa das dxzc");
+    	
     }
-
+    }
     /**
      * Simple test for testing robot battery.
      * 
