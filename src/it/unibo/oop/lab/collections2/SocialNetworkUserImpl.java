@@ -22,7 +22,7 @@ import java.util.Set;
  * @param <U>
  *            Specific user type
  */
-public class SocialNetworkUserImpl<U extends User> extends UserImpl implements SocialNetworkUser<U>, java.util.Collection<U>{
+public class SocialNetworkUserImpl<U extends User> extends UserImpl implements SocialNetworkUser<U>{
 		
 	private final Map<String,List<U>> l = new HashMap<>(); 
 	
@@ -94,7 +94,8 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     	if(!this.l.containsKey(groupName)) {
     		return new ArrayList<>();
     	}else {
-    		Collection<U> co = this.l.get(groupName);
+    		Collection<U> co = new ArrayList<>() ;
+    		co.addAll(this.l.get(groupName));
     		return co;
     	}
         

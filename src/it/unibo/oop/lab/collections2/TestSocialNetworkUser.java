@@ -69,13 +69,17 @@ public final class TestSocialNetworkUser {
         
         final Collection<User> mgladFriends = mgladwell.getFollowedUsersInGroup("Close friends");
         System.out.println("M Gladwell has not set yet any group called \"Close friends\": " + mgladFriends.isEmpty());
+        
         final Collection<User> dwashFriends = dwashington.getFollowedUsersInGroup(WRITERS);
         System.out.println("Denzel has 2 followed people in group \"writers\": " + (dwashFriends.size() == 2));
         
          
         dwashFriends.add(asmith);
         
-       
+        /*
+         * The above operation *MUST* have no effect on Denzel's profile itself:
+         * STILL TWO PEOPLE in denzel's group called writers
+         */
          
         System.out.println("Denzel has STILL 2 followed people in group \"writers\": "
                 + (dwashington.getFollowedUsersInGroup(WRITERS).size() == 2));
