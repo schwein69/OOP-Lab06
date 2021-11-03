@@ -1,7 +1,13 @@
 package it.unibo.oop.lab.collections2;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 
@@ -16,8 +22,10 @@ import java.util.List;
  * @param <U>
  *            Specific user type
  */
-public class SocialNetworkUserImpl<U extends User> extends UserImpl implements SocialNetworkUser<U> {
-
+public class SocialNetworkUserImpl<U extends User> extends UserImpl implements SocialNetworkUser<U>, java.util.Collection<U>{
+		
+	private final Map<String,List<U>> l = new HashMap<>(); 
+	
     /*
      * 
      * [FIELDS]
@@ -56,6 +64,8 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
         super(name, surname, user, userAge);
+       
+        
     }
 
     /*
@@ -66,17 +76,34 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
 
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
+    	if(!l.containsKey(circle)) {
+    		l.put(circle, new ArrayList<>());
+    	}
+    	if(user != null) {
+    		if(!l.get(circle).contains(user)) {
+    			l.get(circle).add(user);
+    			return true;
+    		}
+    	}
         return false;
     }
 
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return null;
+    	
+    	if(!this.l.containsKey(groupName)) {
+    		return new ArrayList<>();
+    	}else {
+    		Collection<U> co = this.l.get(groupName);
+    		return co;
+    	}
+        
     }
 
     @Override
     public List<U> getFollowedUsers() {
-        return null;
+    	List<U> tm = new ArrayList<U>((Collection<? extends U>) this.l.values());
+        return tm;
     }
 
 }
