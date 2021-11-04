@@ -82,19 +82,20 @@ public class Robot {
     private boolean moveToPosition(final int newX, final int newY) {
 	boolean returnValue = true;
 	if (this.isBatteryEnoughToMove()) {
-	  //  try {
-		if(this.environment.move(newX, newY)) {
+	    // try {
+	    if (this.environment.move(newX, newY)) {
 		this.consumeBatteryForMovement();
 		this.log("Moved to position(" + newX + "," + newY + ").");
-		
-	  //  } catch (PositionOutOfBoundException e) {
-		}else{this.log("Can not move to (" + newX + "," + newY
+
+		// } catch (PositionOutOfBoundException e) {
+	    } else {
+		this.log("Can not move to (" + newX + "," + newY
 			+ ") the robot is touching at least one world boundary");
 		returnValue = false;
-	  //  }
+		// }
 
-	}
-	}else {
+	    }
+	} else {
 	    this.log("Can not move to position(" + newX + "," + newY + "). Not enough battery.");
 	    returnValue = false;
 	}
@@ -127,9 +128,9 @@ public class Robot {
      * @return A boolean indicating if the robot has enough energy to move
      */
     protected boolean isBatteryEnoughToMove() {
-	if(this.getBatteryLevel() >= Robot.MOVEMENT_DELTA_CONSUMPTION) {
+	if (this.getBatteryLevel() >= Robot.MOVEMENT_DELTA_CONSUMPTION) {
 	    return true;
-	}else {
+	} else {
 	    throw new NotEnoughBatteryException(BATTERY_EMPTY);
 	}
     }
