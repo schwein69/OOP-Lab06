@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
@@ -28,17 +29,20 @@ public final class BaseRobotTest {
          *  1) Create a Robot with battery level 100
          */
         final Robot r1 = new Robot("SimpleRobot", 100);
+        
         // checking if robot is in position x=0; y=0
         assertEquals("[CHECKING ROBOT INIT POS X]", 0, r1.getEnvironment().getCurrPosX());
         assertEquals("[CHECKING ROBOT INIT POS Y]", 0, r1.getEnvironment().getCurrPosY());
         /*
          * 2) Move the robot right until it touches the world limit
          */
+        try {
         for (int i = 0; i < RobotEnvironment.WORLD_X_UPPER_LIMIT; i++) {
             // check if position if coherent
+            assertNotNull(r1.moveRight());
             assertTrue("[CHECKING MOVING RIGHT]", r1.moveRight());
         }
-        try {
+       
         
         // reached the right limit of the world
         assertFalse("[CHECKING MOVING RIGHT]", r1.moveRight());
@@ -54,21 +58,18 @@ public final class BaseRobotTest {
         }
         // reached the upper limit of the world
         boolean le = r1.moveUp();
-        System.out.println(le);
+       // System.out.println(le);
         assertFalse("[CHECKING MOVING UP]", r1.moveUp());
         // checking positions x=50; y=80
         assertEquals("[MOVING RIGHT ROBOT POS X]", RobotEnvironment.WORLD_X_UPPER_LIMIT, r1.getEnvironment().getCurrPosX());
         assertEquals("[MOVING RIGHT ROBOT POS Y]", RobotEnvironment.WORLD_Y_UPPER_LIMIT, r1.getEnvironment().getCurrPosY());
         
-       /* if(r1.moveUp()==false) {
-           
-        }*/
-        
+   
+        fail("puppo");
     }catch(PositionOutOfBoundException p) {
     	//fail("Should have thrown an exception");
-	System.out.println(p);
-    	System.out.println("2 asd sa das dxzc");
-    	
+	
+	p.printStackTrace();	
     }
     }
     /**
@@ -82,6 +83,7 @@ public final class BaseRobotTest {
          * Repeatedly move the robot up and down until the battery is completely
          * exhausted.
          */
+        try {
         while (r2.getBatteryLevel() > 0) {
             r2.moveUp();
             r2.moveDown();
@@ -98,5 +100,8 @@ public final class BaseRobotTest {
         r2.recharge();
         // verify battery level
         assertEquals(100, r2.getBatteryLevel(), 0);
+        }catch(NotEnoughBatteryException e) {
+    	e.printStackTrace();
+        }
     }
 }
