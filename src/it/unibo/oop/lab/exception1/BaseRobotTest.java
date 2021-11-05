@@ -39,16 +39,20 @@ public final class BaseRobotTest {
 	    for (int i = 0; i < RobotEnvironment.WORLD_X_UPPER_LIMIT; i++) {
 		// check if position if coherent
 		// assertNotNull(r1.moveRight());
-		assertTrue("[CHECKING MOVING RIGHT]", r1.moveRight());
+		// assertTrue("[CHECKING MOVING RIGHT]", r1.moveRight());
+		r1.moveRight();
 	    }
 
 	    // reached the right limit of the world
-	    assertFalse("[CHECKING MOVING RIGHT]", r1.moveRight());
+	    // assertFalse("[CHECKING MOVING RIGHT]", r1.moveRight());
+	    r1.moveRight();
 	    fail("should have lanched an exception");
+	} catch (NotEnoughBatteryException n) {
+	    n.printStackTrace();
 	} catch (PositionOutOfBoundException p) {
-
 	    p.printStackTrace();
 	}
+
 	// checking positions x=50; y=0
 	try {
 	    assertEquals("[MOVING RIGHT ROBOT POS X]", RobotEnvironment.WORLD_X_UPPER_LIMIT,
@@ -59,18 +63,22 @@ public final class BaseRobotTest {
 	     */
 	    for (int i = 0; i < RobotEnvironment.WORLD_Y_UPPER_LIMIT; i++) {
 		// check if position if coherent
-		assertTrue("[CHECKING MOVING UP]", r1.moveUp());
+		// assertTrue("[CHECKING MOVING UP]", r1.moveUp());
+		r1.moveUp();
 	    }
 	    // reached the upper limit of the world
 
-	    assertFalse("[CHECKING MOVING UP]", r1.moveUp());
+	    // assertFalse("[CHECKING MOVING UP]", r1.moveUp());
+
 	    // checking positions x=50; y=80
 	    assertEquals("[MOVING RIGHT ROBOT POS X]", RobotEnvironment.WORLD_X_UPPER_LIMIT,
 		    r1.getEnvironment().getCurrPosX());
 	    assertEquals("[MOVING RIGHT ROBOT POS Y]", RobotEnvironment.WORLD_Y_UPPER_LIMIT,
 		    r1.getEnvironment().getCurrPosY());
-	    
+	    r1.moveUp();
 	    fail("should have lanched an exception");
+	} catch (NotEnoughBatteryException n) {
+	    n.printStackTrace();
 	} catch (PositionOutOfBoundException l) {
 	    assertNotNull(l.getMessage());
 	    l.printStackTrace();
@@ -101,13 +109,17 @@ public final class BaseRobotTest {
 	    // verify position: same as start position
 	    assertEquals("[CHECKING ROBOT INIT POS Y]", 0, r2.getEnvironment().getCurrPosY());
 	    // out of world: returns false
-	    assertFalse("[CHECKING MOVING UP]", r2.moveUp());
+	    // assertFalse("[CHECKING MOVING UP]", r2.moveUp());
+	    r2.moveUp();
 	    // recharge battery
 	    r2.recharge();
 	    // verify battery level
 	    assertEquals(100, r2.getBatteryLevel(), 0);
+	    fail("should have lanched an exception");
 	} catch (NotEnoughBatteryException e) {
 	    e.printStackTrace();
+	} catch (PositionOutOfBoundException n) {
+	    n.printStackTrace();
 	}
     }
 }
