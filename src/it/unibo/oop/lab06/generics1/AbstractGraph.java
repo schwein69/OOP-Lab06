@@ -9,17 +9,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class GraphImpl<N> implements Graph<N> {//caso grafo orientato
+public abstract class AbstractGraph<N> implements Graph<N> {//caso grafo orientato
 	
 	private List<N> s = new LinkedList<N>();
 	private Map<N,Set<N>> adj = new HashMap<>();
 
 	
-	public List<N> getS() {
+	protected List<N> getS() {
 		return s;
 	}
 
-	public Map<N, Set<N>> getAdj() {
+	protected Map<N, Set<N>> getAdj() {
 		return adj;
 	}
 
@@ -31,15 +31,11 @@ public class GraphImpl<N> implements Graph<N> {//caso grafo orientato
 		}
 	}
 
-	@Override
-	public void addEdge(N source, N target) {
-		// TODO Auto-generated method stub
-		if (source != null && target != null && 
-			this.getAdj().containsKey(source) && this.getAdj().containsKey(target)) {
-			
-			this.adj.get(source).add(target);
-		}
-	}
+	
+	public abstract void addEdge(N source, N target);
+		
+		
+	
 	
 	@Override
 	public Set<N> linkedNodes(N node) {
