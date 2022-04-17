@@ -72,13 +72,13 @@ public final class UseCollection {
             a.add(i);
         }
         time = System.nanoTime() - time;
-        System.out.println("inserting " + ELEMS + " ArrayList took " + time + "ns (" + time / TO_MS + "ms)");
+        System.out.println("inserting " + ELEMS + " LinkedList took " + time + "ns (" + time / TO_MS + "ms)");
         time = System.nanoTime();
         for (int i = 0; i < ELEMS; i++) {
             l.add(i);
         }
         time = System.nanoTime() - time;
-        System.out.println("inserting " + ELEMS + " LinkedList took " + time + "ns (" + time / TO_MS + "ms)");
+        System.out.println("inserting " + ELEMS + " ArrayList took " + time + "ns (" + time / TO_MS + "ms)");
         /*
          * 6) Measure the performance of reading 1000 times an element whose position is
          * in the middle of the collection for both ArrayList and LinkedList, using the
