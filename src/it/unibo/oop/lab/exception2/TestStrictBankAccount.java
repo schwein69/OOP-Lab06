@@ -32,7 +32,7 @@ public final class TestStrictBankAccount {
 	BankAccount b1 = new StrictBankAccount(a1.getUserID(), 10000.00, NMaxATMTRANSACTIONS);
 	BankAccount b2 = new StrictBankAccount(a2.getUserID(), 10000.00, NMaxATMTRANSACTIONS);
 	try {
-	    b2.withdraw(a2.getUserID(), 10001.00);
+	    //b2.withdraw(a2.getUserID(), 10001.00);
 	    // b1.deposit(a2.getUserID(), 1000.00);
 	    for (int i = 0; i < 10; i++) {
 		b1.depositFromATM(a1.getUserID(), 1000.00);
